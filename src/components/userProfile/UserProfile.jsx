@@ -1,4 +1,4 @@
-import  React from 'react';
+import  React, { useEffect } from 'react';
 import "./userProfile.css";
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
@@ -8,6 +8,10 @@ const Item = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(1),
   textAlign: 'center',
 }));
+
+let calcBMI = (weight, height) => {
+  return (weight / Math.pow((height/100), 2)).toFixed(1);
+}
 
 export default function UserProfile() {
   return (
@@ -19,7 +23,7 @@ export default function UserProfile() {
       <Stack direction="column" spacing={2}>
         <Item>Height(cm): 182</Item>
         <Item>Weight(kg): 100</Item>
-        <Item>BMI: 22</Item>
+        <Item>BMI: {calcBMI(100, 182)}</Item>
       </Stack>
     </div>
   )
