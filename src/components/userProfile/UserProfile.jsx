@@ -17,8 +17,8 @@ export default function UserProfile() {
       </div>
       <h2>Rocky</h2>
       <Stack direction="column" spacing={2}>
-        <Item>Height: 6'0</Item>
-        <Item>Weight: 100kg</Item>
+        <Item>Height(cm): 182</Item>
+        <Item>Weight(kg): 100</Item>
         <Item>BMI: 22</Item>
       </Stack>
     </div>
