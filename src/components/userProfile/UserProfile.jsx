@@ -10,7 +10,8 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 let calcBMI = (weight, height) => {
-  return (weight / Math.pow((height/100), 2)).toFixed(1);
+  const heightInMeters = (height * height)/10000
+  return weight/heightInMeters;
 }
 
 export default function UserProfile() {
@@ -22,8 +23,8 @@ export default function UserProfile() {
       <h2>Rocky</h2>
       <Stack direction="column" spacing={2}>
         <Item>Height(cm): 182</Item>
-        <Item>Weight(kg): 100</Item>
-        <Item>BMI: {calcBMI(100, 182)}</Item>
+        <Item>Weight(kg): 90</Item>
+        <Item>BMI: {calcBMI(90, 182)}</Item>
       </Stack>
     </div>
   )
