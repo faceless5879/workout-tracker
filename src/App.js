@@ -11,7 +11,7 @@ function App() {
     <div className="App">
       {/* <BasicModal /> */}
       <NavBar displayProfile={displayProfile} />
-      <UserProfile />
+      {displayProfile ? <UserProfile /> : null}
     </div>
   );
 }
