@@ -20,9 +20,9 @@ const rows = [
 
 export default function DenseTable() {
   return (
-    <Fragment>
+    <Fragment className="dayView-chart">
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+        <Table sx={{ maxWidth: "90%" }} size="small" aria-label="a dense table" margin-inline="auto">
         <TableHead>
           <TableRow>
             <TableCell>Exercise</TableCell>
