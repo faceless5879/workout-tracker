@@ -42,7 +42,7 @@ const tempWeekViewArr = [
 ];
 
 export default function WeekView({ setView }) {
-  const [weekViewArr, setWeekViewArr] = useState(tempWeekViewArr);
+  const [weekViewArr, setWeekViewArr] = useState([]);
 
   useEffect(() => {
     (async () => {
@@ -56,15 +56,15 @@ export default function WeekView({ setView }) {
             'Accept-Encoding': 'gzip, deflate, br',
             Connection: 'keep-alive',
             'Content-Length': 123,
-            authorization: localStorage.getItem('token'),
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
         }
       );
       const content = await rawResponse.json();
       console.log(content);
-      // setWeekViewArr(content);
+      setWeekViewArr(content);
     })();
-  });
+  }, []);
 
   return (
     <Box>
@@ -77,8 +77,8 @@ export default function WeekView({ setView }) {
         {/* // TODO add onClick to Item to setView to DayView obj.dayOfWeek */}
         {weekViewArr.map(obj => {
           return (
-            <Item>{`${daysOfTheWeek[obj.dayOfWeek]} -  Workout: ${
-              obj.name
+            <Item>{`${daysOfTheWeek[obj.day_of_week] || ''} -  Workout: ${
+              obj.name || ''
             }`}</Item>
           );
         })}
