@@ -76,6 +76,7 @@ export default function SignupModal() {
         });
         const content = await rawResponse.json();
         localStorage.setItem('token', content.token);
+        localStorage.setItem('userid', content.userid);
       })();
     } else {
       alert('invalid email');
