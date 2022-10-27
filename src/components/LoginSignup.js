@@ -5,7 +5,7 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import SignupModal from './SignupModal';
 
-const URL = 'http://localhost:8080';
+const API = 'http://localhost:8080'; // https://workout-tracker-api.onrender.com/
 
 export default function LoginSignup() {
   // email validation regex
@@ -29,7 +29,7 @@ export default function LoginSignup() {
     if (isEmail(email)) {
       const data = { email, password };
       (async () => {
-        const rawResponse = await fetch(`${URL}/user/signup`, {
+        const rawResponse = await fetch(`${API}/user/signup`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

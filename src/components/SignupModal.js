@@ -5,7 +5,7 @@ import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 
-const URL = 'http://localhost:8080';
+const API = 'http://localhost:8080'; // https://workout-tracker-api.onrender.com/
 
 const style = {
   position: 'absolute',
@@ -62,7 +62,7 @@ export default function SignupModal() {
     if (isEmail(email)) {
       const data = { email, password, firstName, lastName, height, weight };
       (async () => {
-        const rawResponse = await fetch(`${URL}/user/signup`, {
+        const rawResponse = await fetch(`${API}/user/signup`, {
           method: 'POST',
           mode: 'cors',
           headers: {
