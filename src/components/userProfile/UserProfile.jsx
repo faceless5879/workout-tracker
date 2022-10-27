@@ -16,6 +16,8 @@ let calcBMI = (weight, height) => {
 
 export default function UserProfile() {
   return (
+    <div>
+      <button className="home-btn">Home</button>
     <div className="card">
       <div>
         <img className="image" alt="Workout Avatar" src={require("./image/f9b1e644099201a068b395489e96013a.jpeg")} />
@@ -26,6 +28,7 @@ export default function UserProfile() {
         <Item>Weight(kg): 90</Item>
         <Item>BMI: {calcBMI(90, 182)}</Item>
       </Stack>
+      </div>
     </div>
   )
 }
