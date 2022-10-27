@@ -5,6 +5,8 @@ import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 
+const URL = 'http://localhost:8080';
+
 const style = {
   position: 'absolute',
   top: '50%',
@@ -18,6 +20,10 @@ const style = {
 };
 
 export default function SignupModal() {
+  // email validation regex
+  function isEmail(email) {
+    return /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email);
+  }
   // modal states
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -53,7 +59,27 @@ export default function SignupModal() {
 
   // form submission
   function submit() {
-    const newUser = {};
+    if (isEmail(email)) {
+      const data = { email, password, firstName, lastName, height, weight };
+      (async () => {
+        const rawResponse = await fetch(`${URL}/user/signup`, {
+          method: 'POST',
+          mode: 'cors',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: '*/*',
+            'Accept-Encoding': 'gzip, deflate, br',
+            Connection: 'keep-alive',
+            'Content-Length': 123,
+          },
+          body: JSON.stringify(data),
+        });
+        const content = await rawResponse.json();
+        localStorage.setItem('token', content.token);
+      })();
+    } else {
+      alert('invalid email');
+    }
   }
 
   return (
