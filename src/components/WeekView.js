@@ -6,7 +6,7 @@ import Stack from '@mui/material/Stack';
 import { styled } from '@mui/material/styles';
 
 // This will eventually be replaced by process.env.BACKEND_URL or something
-const API = 'http://localhost:8080'; // https://workout-tracker-api.onrender.com/
+const API = process.env.API_URL || 'http://localhost:8080';
 
 // The most straitforward way of doing this I've been able to find.
 const daysOfTheWeek = [
@@ -32,17 +32,17 @@ const Item = styled(Paper)(({ theme }) => ({
 // this array is here as a template for what I believe should returned by the API call and for testing
 // It should not exist in production
 const tempWeekViewArr = [
-  { name: 'upper body', dayOfWeek: 0 },
-  { name: 'lower body', dayOfWeek: 1 },
-  { name: 'push', dayOfWeek: 2 },
-  { name: 'pull', dayOfWeek: 3 },
-  { name: 'legs', dayOfWeek: 4 },
-  { name: 'arms', dayOfWeek: 5 },
-  { name: 'booty', dayOfWeek: 6 },
+  { name: '', dayOfWeek: 0 },
+  { name: '', dayOfWeek: 1 },
+  { name: '', dayOfWeek: 2 },
+  { name: '', dayOfWeek: 3 },
+  { name: '', dayOfWeek: 4 },
+  { name: '', dayOfWeek: 5 },
+  { name: '', dayOfWeek: 6 },
 ];
 
 export default function WeekView({ setView }) {
-  const [weekViewArr, setWeekViewArr] = useState([]);
+  const [weekViewArr, setWeekViewArr] = useState(tempWeekViewArr);
 
   useEffect(() => {
     (async () => {
@@ -61,8 +61,9 @@ export default function WeekView({ setView }) {
         }
       );
       const content = await rawResponse.json();
-      console.log(content);
-      setWeekViewArr(content);
+      if (Array.isArray(content)) {
+        setWeekViewArr(content);
+      }
     })();
   }, []);
 
