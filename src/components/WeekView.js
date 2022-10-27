@@ -1,9 +1,12 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import { styled } from '@mui/material/styles';
+
+// This will eventually be replaced by process.env.BACKEND_URL or something
+const API = 'http://localhost:8080'; // https://workout-tracker-api.onrender.com/
 
 // The most straitforward way of doing this I've been able to find.
 const daysOfTheWeek = [
@@ -38,8 +41,30 @@ const tempWeekViewArr = [
   { name: 'booty', dayOfWeek: 6 },
 ];
 
-export default function WeekView() {
+export default function WeekView({ setView }) {
   const [weekViewArr, setWeekViewArr] = useState(tempWeekViewArr);
+
+  useEffect(() => {
+    (async () => {
+      const rawResponse = await fetch(
+        `${API}/workout/${localStorage.getItem('userid')}`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: '*/*',
+            'Accept-Encoding': 'gzip, deflate, br',
+            Connection: 'keep-alive',
+            'Content-Length': 123,
+            authorization: localStorage.getItem('token'),
+          },
+        }
+      );
+      const content = await rawResponse.json();
+      console.log(content);
+      // setWeekViewArr(content);
+    })();
+  });
 
   return (
     <Box>
