@@ -5,7 +5,14 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import SignupModal from './SignupModal';
 
+const URL = 'http://localhost:8080';
+
 export default function LoginSignup() {
+  // email validation regex
+  function isEmail(email) {
+    return /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email);
+  }
+
   // login info states
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
@@ -18,7 +25,28 @@ export default function LoginSignup() {
     setPassword(e.target.value);
   }
 
-  function submit() {}
+  function submit() {
+    if (isEmail(email)) {
+      const data = { email, password };
+      (async () => {
+        const rawResponse = await fetch(`${URL}/user/signup`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: '*/*',
+            'Accept-Encoding': 'gzip, deflate, br',
+            Connection: 'keep-alive',
+            'Content-Length': 123,
+          },
+          body: JSON.stringify(data),
+        });
+        const content = await rawResponse.json();
+        localStorage.setItem('token', content.token);
+      })();
+    } else {
+      alert('invalid email');
+    }
+  }
 
   return (
     <Box
