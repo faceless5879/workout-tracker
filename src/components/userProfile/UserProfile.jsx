@@ -14,10 +14,12 @@ let calcBMI = (weight, height) => {
   return weight/heightInMeters;
 }
 
-export default function UserProfile() {
+export default function UserProfile(props) {
+  const [setHomeViewHandler] = props
+
   return (
     <div>
-      <button className="home-btn">Home</button>
+      <button className="home-btn" onClick={setHomeViewHandler}>Home</button>
     <div className="card">
       <div>
         <img className="image" alt="Workout Avatar" src={require("./image/f9b1e644099201a068b395489e96013a.jpeg")} />
