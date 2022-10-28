@@ -7,7 +7,7 @@ import { styled } from '@mui/material/styles';
 import DayView from './dayView/DayView';
 
 // This will eventually be replaced by process.env.BACKEND_URL or something
-const API = process.env.API_URL || 'http://localhost:8080';
+const API = process.env.API_URL || 'https://workout-tracker-api.onrender.com';
 
 // The most straitforward way of doing this I've been able to find.
 const daysOfTheWeek = [

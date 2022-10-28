@@ -77,7 +77,7 @@ export default function DayView({ setView, workoutId }) {
                 <TableCell align="right">{row.reps}</TableCell>
                 <TableCell align="right">{<input type="checkbox" />}</TableCell>
                 <TableCell align="right">
-                  <ExerciseModal setView={setView} exerciseId={row.id} workoutId={workoutId}></ExerciseModal>
+                  <ExerciseModal setView={setView} exerciseId={row.id} workoutId={workoutId} initName={row.name} initSets={row.sets} initReps={row.reps}></ExerciseModal>
                 </TableCell>
               </TableRow>
             ))}

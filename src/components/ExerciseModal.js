@@ -20,16 +20,23 @@ const style = {
   p: 4,
 };
 
-export default function ExerciseModal({ setView, exerciseId, workoutId }) {
+export default function ExerciseModal({
+  setView,
+  exerciseId,
+  initName,
+  initSets,
+  initReps,
+  workoutId,
+}) {
   // modal states
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   // exercise states
-  const [name, setName] = React.useState('');
-  const [sets, setSets] = React.useState('');
-  const [reps, setReps] = React.useState('');
+  const [name, setName] = React.useState(initName);
+  const [sets, setSets] = React.useState(initSets);
+  const [reps, setReps] = React.useState(initReps);
 
   // exercise state handlers
   function handleName(e) {
