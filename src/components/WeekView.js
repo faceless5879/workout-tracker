@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import { styled } from '@mui/material/styles';
+import DayView from './dayView/DayView';
 
 // This will eventually be replaced by process.env.BACKEND_URL or something
 const API = process.env.API_URL || 'http://localhost:8080';
@@ -78,7 +79,11 @@ export default function WeekView({ setView }) {
         {/* // TODO add onClick to Item to setView to DayView obj.dayOfWeek */}
         {weekViewArr.map(obj => {
           return (
-            <Item>{`${daysOfTheWeek[obj.day_of_week] || ''} -  Workout: ${
+            <Item
+              onClick={() => {
+                setView(<DayView setView={setView}></DayView>);
+              }}
+            >{`${daysOfTheWeek[obj.day_of_week] || ''} -  Workout: ${
               obj.name || ''
             }`}</Item>
           );
