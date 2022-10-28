@@ -10,6 +10,7 @@ import LoginSignup from "../LoginSignup";
 export default function NavBar({ setView, displayProfile, setDisplayProfile }) {
   function logout() {
     localStorage.clear();
+    setDisplayProfile(false);
     setView(<LoginSignup setView={setView}></LoginSignup>)
   }
   return (
