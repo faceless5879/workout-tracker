@@ -56,7 +56,7 @@ export default function DayView({ setView, workoutId }) {
           <TableHead>
             <TableRow>
               <TableCell>Exercise</TableCell>
-              <TableCell align="right">Weight</TableCell>
+              <TableCell align="right">Weight(not implemented)</TableCell>
               <TableCell align="right">Sets</TableCell>
               <TableCell align="right">Reps</TableCell>
               <TableCell align="right">Complete</TableCell>
