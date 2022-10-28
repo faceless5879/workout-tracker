@@ -10,8 +10,9 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import dummy from './dummyData';
 import WeekView from '../WeekView';
+import ExerciseModal from '../ExerciseModal';
 
-const API = process.env.API_URL || 'http://localhost:8080';
+const API = process.env.API_URL || 'https://workout-tracker-api.onrender.com';
 
 function createData(name, weight, sets, reps) {
   return { name, weight, sets, reps };
@@ -75,6 +76,9 @@ export default function DayView({ setView, workoutId }) {
                 <TableCell align="right">{row.sets}</TableCell>
                 <TableCell align="right">{row.reps}</TableCell>
                 <TableCell align="right">{<input type="checkbox" />}</TableCell>
+                <TableCell align="right">
+                  <ExerciseModal setView={setView} exerciseId={row.id} workoutId={workoutId}></ExerciseModal>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>

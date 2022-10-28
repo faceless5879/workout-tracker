@@ -1,0 +1,120 @@
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Modal from '@mui/material/Modal';
+import TextField from '@mui/material/TextField';
+import Stack from '@mui/material/Stack';
+import DayView from './dayView/DayView';
+
+const API = process.env.API_URL || 'https://workout-tracker-api.onrender.com';
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
+
+export default function ExerciseModal({ setView, exerciseId, workoutId }) {
+  // modal states
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  // exercise states
+  const [name, setName] = React.useState('');
+  const [sets, setSets] = React.useState('');
+  const [reps, setReps] = React.useState('');
+
+  // exercise state handlers
+  function handleName(e) {
+    setName(e.target.value);
+  }
+  function handleSets(e) {
+    setSets(e.target.value);
+  }
+  function handleReps(e) {
+    setReps(e.target.value);
+  }
+
+  // form submission
+  function submit() {
+    const data = { exerciseId, name, sets, reps };
+    (async () => {
+      const rawResponse = await fetch(`${API}/exercise/update`, {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: '*/*',
+          'Accept-Encoding': 'gzip, deflate, br',
+          Connection: 'keep-alive',
+          'Content-Length': 123,
+        },
+        body: JSON.stringify(data),
+      });
+      setView(<DayView setView={setView} workoutId={workoutId}></DayView>);
+    })();
+  }
+
+  return (
+    <div>
+      <Button onClick={handleOpen}>edit</Button>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby='modal-modal-title'
+        aria-describedby='modal-modal-description'
+      >
+        <Box component='form' sx={style} noValidate autoComplete='off'>
+          <Stack
+            direction='column'
+            justifyContent='center'
+            alignItems='center'
+            spacing={0.5}
+          >
+            <TextField
+              id='name'
+              label='Name'
+              value={name}
+              onChange={handleName}
+            />
+            <TextField
+              id='sets'
+              label='Sets'
+              value={sets}
+              onChange={handleSets}
+            />
+            <TextField
+              id='reps'
+              label='Reps'
+              value={reps}
+              onChange={handleReps}
+            />
+            <Button
+              onClick={() => {
+                submit();
+              }}
+              variant='outlined'
+            >
+              Submit
+            </Button>
+            <Button
+              onClick={() => {
+                handleClose();
+              }}
+              variant='outlined'
+            >
+              Close
+            </Button>
+          </Stack>
+        </Box>
+      </Modal>
+    </div>
+  );
+}
