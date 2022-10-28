@@ -81,7 +81,9 @@ export default function WeekView({ setView }) {
           return (
             <Item
               onClick={() => {
-                setView(<DayView setView={setView}></DayView>);
+                setView(
+                  <DayView setView={setView} workoutId={obj.id}></DayView>
+                );
               }}
             >{`${daysOfTheWeek[obj.day_of_week] || ''} -  Workout: ${
               obj.name || ''
