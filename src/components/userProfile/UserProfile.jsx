@@ -61,8 +61,8 @@ export default function UserProfile({ setDisplayProfile, setView }) {
         </div>
         <h2>{userInfo.first_name}</h2>
         <Stack direction="column" spacing={2}>
-          <Item>{userInfo.height}(cm): 182</Item>
-          <Item>{userInfo.weight}(kg): 90</Item>
+          <Item>Height(cm): {userInfo.height}</Item>
+          <Item>Weight(kg): {userInfo.weight}</Item>
           <Item>BMI: {calcBMI(userInfo.weight, userInfo.height)}</Item>
         </Stack>
       </div>
