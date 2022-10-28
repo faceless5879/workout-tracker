@@ -4,6 +4,7 @@ import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
+import WeekView from './WeekView';
 
 const API = 'http://localhost:8080'; // https://workout-tracker-api.onrender.com/
 
@@ -19,7 +20,7 @@ const style = {
   p: 4,
 };
 
-export default function SignupModal() {
+export default function SignupModal({ setView }) {
   // email validation regex
   function isEmail(email) {
     return /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email);
@@ -77,6 +78,7 @@ export default function SignupModal() {
         const content = await rawResponse.json();
         localStorage.setItem('token', content.token);
         localStorage.setItem('userid', content.userid);
+        setView(<WeekView setView={setView}></WeekView>);
       })();
     } else {
       alert('invalid email');
