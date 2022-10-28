@@ -12,7 +12,7 @@ function App() {
 
   useEffect(() => {
     if (localStorage.getItem('userid')) {
-      setView(<WeekView></WeekView>);
+      setView(<WeekView setView={setView}></WeekView>);
     }
   }, []);
 
