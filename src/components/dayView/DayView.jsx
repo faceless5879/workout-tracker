@@ -11,7 +11,7 @@ import Paper from '@mui/material/Paper';
 import dummy from './dummyData';
 import WeekView from '../WeekView';
 
-const API = process.env.API_URL || 'http://localhost:8080';
+const API = process.env.API_URL || 'https://workout-tracker-api.onrender.com';
 
 function createData(name, weight, sets, reps) {
   return { name, weight, sets, reps };
