@@ -6,7 +6,7 @@ import { styled } from '@mui/material/styles';
 import { Button } from '@mui/material';
 import WeekView from '../WeekView';
 
-const API = process.env.API_URL || 'http://localhost:8080';
+const API = process.env.API_URL || 'https://workout-tracker-api.onrender.com';
 
 const Item = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(1),
