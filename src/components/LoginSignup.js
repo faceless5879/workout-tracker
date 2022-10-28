@@ -29,7 +29,7 @@ export default function LoginSignup() {
     if (isEmail(email)) {
       const data = { email, password };
       (async () => {
-        const rawResponse = await fetch(`${API}/user/signup`, {
+        const rawResponse = await fetch(`${API}/user/login`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -42,6 +42,7 @@ export default function LoginSignup() {
         });
         const content = await rawResponse.json();
         localStorage.setItem('token', content.token);
+        localStorage.setItem('userid', content.userid);
       })();
     } else {
       alert('invalid email');
