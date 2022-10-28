@@ -32,6 +32,7 @@ export default function LoginSignup({ setView }) {
       (async () => {
         const rawResponse = await fetch(`${API}/user/login`, {
           method: 'POST',
+          mode: 'cors',
           headers: {
             'Content-Type': 'application/json',
             Accept: '*/*',
