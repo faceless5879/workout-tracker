@@ -7,7 +7,6 @@ import Button from "@mui/material/Button";
 
 export default function ButtonAppBar(props) {
   const { displayProfile } = props;
-  console.log(displayProfile);
   return (
     <Box style={{ display: "flex", justifyContent: "center" }}>
       <AppBar position="static">
