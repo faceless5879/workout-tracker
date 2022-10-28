@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Fragment, useState } from 'react';
+import { Fragment, useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -10,6 +10,8 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import dummy from './dummyData';
 import WeekView from '../WeekView';
+
+const API = process.env.API_URL || 'http://localhost:8080';
 
 function createData(name, weight, sets, reps) {
   return { name, weight, sets, reps };
@@ -23,6 +25,29 @@ const fakeRows = [
 export default function DayView({ setView, workoutId }) {
 
   const [rows, setRows] = useState(fakeRows)
+
+  useEffect(() => {
+    (async () => {
+      const rawResponse = await fetch(
+        `${API}/exercise/${workoutId}`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: '*/*',
+            'Accept-Encoding': 'gzip, deflate, br',
+            Connection: 'keep-alive',
+            'Content-Length': 123,
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        }
+      );
+      const content = await rawResponse.json();
+      if (Array.isArray(content)) {
+        setRows(content);
+      }
+    })();
+  }, []);
 
   return (
     <Fragment>
