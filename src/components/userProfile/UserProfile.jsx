@@ -16,7 +16,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 let calcBMI = (weight, height) => {
   const heightInMeters = (height * height) / 10000
-  return weight / heightInMeters;
+  return (weight / heightInMeters).toFixed(2);
 }
 
 export default function UserProfile({ setDisplayProfile, setView }) {
