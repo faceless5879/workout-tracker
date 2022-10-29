@@ -12,7 +12,7 @@ import dummy from './dummyData';
 import WeekView from '../WeekView';
 import ExerciseModal from '../ExerciseModal';
 
-const API = process.env.API_URL || 'https://workout-tracker-api.onrender.com';
+const API = process.env.REACT_APP_API_URL || 'http://localhost:8080' // http://workout-tracker-api.onrender.com';
 
 function createData(name, weight, sets, reps) {
   return { name, weight, sets, reps };
@@ -25,7 +25,7 @@ const fakeRows = [
 
 export default function DayView({ setView, workoutId }) {
 
-  const [rows, setRows] = useState(fakeRows)
+  const [rows, setRows] = useState([{ name: "", weight: "", sets: "", reps: "", break_time: "" }])
 
   useEffect(() => {
     (async () => {
@@ -60,6 +60,7 @@ export default function DayView({ setView, workoutId }) {
               <TableCell align="right">Weight(not implemented)</TableCell>
               <TableCell align="right">Sets</TableCell>
               <TableCell align="right">Reps</TableCell>
+              <TableCell align="right">Break Time</TableCell>
               <TableCell align="right">Complete</TableCell>
             </TableRow>
           </TableHead>
@@ -75,9 +76,10 @@ export default function DayView({ setView, workoutId }) {
                 <TableCell align="right">{row.weight}</TableCell>
                 <TableCell align="right">{row.sets}</TableCell>
                 <TableCell align="right">{row.reps}</TableCell>
+                <TableCell align="right">{row.break_time}</TableCell>
                 <TableCell align="right">{<input type="checkbox" />}</TableCell>
                 <TableCell align="right">
-                  <ExerciseModal setView={setView} exerciseId={row.id} workoutId={workoutId} initName={row.name} initSets={row.sets} initReps={row.reps}></ExerciseModal>
+                  <ExerciseModal setView={setView} exerciseId={row.id} workoutId={workoutId} initName={row.name} initSets={row.sets} initReps={row.reps} initBreak={row.break_time}></ExerciseModal>
                 </TableCell>
               </TableRow>
             ))}

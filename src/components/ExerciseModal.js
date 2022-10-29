@@ -6,7 +6,7 @@ import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import DayView from './dayView/DayView';
 
-const API = process.env.API_URL || 'https://workout-tracker-api.onrender.com';
+const API = process.env.REACT_APP_API_URL || 'http://localhost:8080'; //'https://workout-tracker-api.onrender.com';
 
 const style = {
   position: 'absolute',
@@ -26,6 +26,7 @@ export default function ExerciseModal({
   initName,
   initSets,
   initReps,
+  initBreak,
   workoutId,
 }) {
   // modal states
@@ -37,6 +38,7 @@ export default function ExerciseModal({
   const [name, setName] = React.useState(initName);
   const [sets, setSets] = React.useState(initSets);
   const [reps, setReps] = React.useState(initReps);
+  const [breakTime, setBreakTime] = React.useState(initBreak);
 
   // exercise state handlers
   function handleName(e) {
@@ -48,24 +50,27 @@ export default function ExerciseModal({
   function handleReps(e) {
     setReps(e.target.value);
   }
+  function handleBreakTime(e) {
+    setBreakTime(e.target.value);
+  }
 
   // form submission
   function submit() {
-    const data = { exerciseId, name, sets, reps };
+    const data = { name, sets, reps, break_time: breakTime };
     (async () => {
-      const rawResponse = await fetch(`${API}/exercise/update`, {
-        method: 'POST',
-        mode: 'cors',
+      const rawResponse = await fetch(`${API}/exercise/${exerciseId}`, {
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
           Accept: '*/*',
           'Accept-Encoding': 'gzip, deflate, br',
           Connection: 'keep-alive',
           'Content-Length': 123,
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
         body: JSON.stringify(data),
       });
-      setView(<DayView setView={setView} workoutId={workoutId}></DayView>);
+      handleClose();
     })();
   }
 
@@ -101,6 +106,12 @@ export default function ExerciseModal({
               id='reps'
               label='Reps'
               value={reps}
+              onChange={handleReps}
+            />
+            <TextField
+              id='breakTime'
+              label='Break Time'
+              value={breakTime}
               onChange={handleReps}
             />
             <Button

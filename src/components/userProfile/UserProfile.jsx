@@ -5,8 +5,9 @@ import Stack from '@mui/material/Stack';
 import { styled } from '@mui/material/styles';
 import { Button } from '@mui/material';
 import WeekView from '../WeekView';
+import ProfileUpdate from '../ProfileUpdate'
 
-const API = process.env.API_URL || 'https://workout-tracker-api.onrender.com';
+const API = process.env.REACT_APP_API_URL || 'http://localhost:8080';//'https://workout-tracker-api.onrender.com';
 
 const Item = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(1),
@@ -68,8 +69,16 @@ export default function UserProfile({ setDisplayProfile, setView }) {
       </div>
       <Button onClick={() => {
         setDisplayProfile(false);
+        setView(<ProfileUpdate setView={setView}
+          initFirstName={userInfo.first_name} initLastName={userInfo.last_name}
+          initHeight={userInfo.height}
+          initWeight={userInfo.weight}
+          setDisplayProfile={setDisplayProfile}></ProfileUpdate>)
+      }}> edit</Button >
+      <Button onClick={() => {
+        setDisplayProfile(false);
         setView(<WeekView setView={setView}></WeekView>)
       }}>Week View</Button>
-    </div>
+    </div >
   )
 }
