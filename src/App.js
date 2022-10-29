@@ -12,7 +12,7 @@ function App() {
     if (localStorage.getItem('userid')) {
       setView(<WeekView setView={setView}></WeekView>);
     } else {
-      <LoginSignup setView={setView}></LoginSignup>;
+      setView(<LoginSignup setView={setView}></LoginSignup>);
     }
   }, []);
 

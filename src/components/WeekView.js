@@ -28,6 +28,7 @@ const Item = styled(Paper)(({ theme }) => ({
   textAlign: 'center',
   color: theme.palette.text.secondary,
   minWidth: '200px',
+  marginTop: '40px',
 }));
 
 // this array is here as a template for what I believe should returned by the API call and for testing
