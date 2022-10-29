@@ -8,20 +8,10 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import dummy from './dummyData';
 import WeekView from '../WeekView';
 import ExerciseModal from '../ExerciseModal';
-
-const API = process.env.REACT_APP_API_URL || 'http://localhost:8080' // http://workout-tracker-api.onrender.com';
-
-function createData(name, weight, sets, reps) {
-  return { name, weight, sets, reps };
-}
-const fakeRows = [
-  createData('situps', 100, 6, 12),
-  createData(dummy[0]["exercise"], dummy[0]["weight"], dummy[0]["sets"], dummy[0]["reps"]),
-  createData(dummy[1]["exercise"], dummy[1]["weight"], dummy[1]["sets"], dummy[1]["reps"])
-];
+import { utils } from '../../utils'
+const API = utils.API_URL;
 
 export default function DayView({ setView, workoutId }) {
 

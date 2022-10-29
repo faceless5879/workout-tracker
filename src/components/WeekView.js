@@ -8,8 +8,9 @@ import DayView from './dayView/DayView';
 import { Button } from '@mui/material';
 import WorkoutUpdate from './WorkoutUpdate';
 
-// This will eventually be replaced by process.env.BACKEND_URL or something
-const API = process.env.API_URL || 'http://localhost:8080'; //'https://workout-tracker-api.onrender.com';
+import { utils } from '../utils';
+
+const API = utils.API_URL || 'http://localhost:8080';
 
 // The most straitforward way of doing this I've been able to find.
 const daysOfTheWeek = [
@@ -30,7 +31,6 @@ const Item = styled(Paper)(({ theme }) => ({
   textAlign: 'center',
   color: theme.palette.text.secondary,
   minWidth: '200px',
-  marginTop: '40px',
 }));
 
 // this array is here as a template for what I believe should returned by the API call and for testing
