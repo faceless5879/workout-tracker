@@ -6,8 +6,9 @@ import { styled } from '@mui/material/styles';
 import { Button } from '@mui/material';
 import WeekView from '../WeekView';
 import ProfileUpdate from '../ProfileUpdate'
+import { utils } from "../../utils"
 
-const API = process.env.REACT_APP_API_URL || 'http://localhost:8080';//'https://workout-tracker-api.onrender.com';
+const API = utils.API_URL || 'https://workout-tracker-api.onrender.com';
 
 const Item = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(1),

@@ -5,8 +5,10 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import SignupModal from './SignupModal';
 import WeekView from './WeekView';
+import { utils } from '../utils';
 
-const API = process.env.API_URL || 'http://localhost:8080'; //'https://workout-tracker-api.onrender.com';
+const API = utils.API_URL || 'http://localhost:8080';
+console.log(API);
 
 export default function LoginSignup({ setView }) {
   // email validation regex

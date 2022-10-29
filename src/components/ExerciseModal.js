@@ -5,9 +5,9 @@ import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import DayView from './dayView/DayView';
+import { utils } from '../utils';
 
-const API = process.env.REACT_APP_API_URL || 'http://localhost:8080'; //'https://workout-tracker-api.onrender.com';
-
+const API = utils.API_URL;
 const style = {
   position: 'absolute',
   top: '50%',
